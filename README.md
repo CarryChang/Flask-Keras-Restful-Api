@@ -16,5 +16,5 @@
 
 > 后端打印的结果是
 
-<div align=center><img  src="https://github.com/CarryChang/Real_Time_DataMining_Sortware/blob/master/pic/best_comment_analysis.png"></div>
+<div align=center><img  src="https://github.com/CarryChang/Flask-Keras-Restful-Api/blob/master/pic/back_end.png"></div>
 
