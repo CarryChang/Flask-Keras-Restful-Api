@@ -1,11 +1,10 @@
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications import imagenet_utils
-from flask import Flask, jsonify, request, Flask, redirect
-import tensorflow as tf
+from flask import Flask, jsonify, request
+from PIL import Image
 import numpy as np
 import io
-from PIL import Image
 app = Flask(__name__)
 def global_():
 	# 全局加载model, graph
@@ -20,23 +19,21 @@ def processing(image):
 	image = np.expand_dims(image, axis=0)
 	image = imagenet_utils.preprocess_input(image)
 	return image
-# 加载全局变量：model ，graph
+
 global_()
 @app.route("/predict", methods=['POST'])
-def predict():
+def model_predict():
 	image = request.files['image'].read()
 	image = Image.open(io.BytesIO(image))
 	image_ = processing(image)
-	# graph重置
-	data = {}
 	prediction = model.predict(image_)
 	results = imagenet_utils.decode_predictions(prediction)
+	data = dict()
 	data["predictions"] = []
-	for (imagenetID, label, prob) in results[0]:
+	for (_, label, prob) in results[0]:
 		r = {"label": label, "probability": float(prob)}
 		data["predictions"].append(r)
-	# indicate that the request was a success
-	data["success"] = True
+	data["success"] = 1
 	return jsonify(data)
 if __name__ == "__main__":
 	app.run()

@@ -6,6 +6,7 @@ if __name__ == '__main__':
 	api_url = "http://127.0.0.1:5000/predict"
 	for pic_path in ["pic/dog.jpg", 'pic/cat.jpg']:
 		print(pic_path)
+		# 直接传输二进制像素点
 		image = open(pic_path, "rb").read()
 		para = {"image": image}
 		model_result = requests.post(api_url, files=para).json()
