@@ -6,7 +6,7 @@
 #### 一个简单的imagenet的flask后端API，修改了全局model load的方式，增加了模型推理的速度，使用nginx搭配Gunicorn启动Flask，使用虚拟环境搭配sh的启动方式，可以直接对model进行一键重启，并有错误日志监控
  
 >  一键部署，源代码修改自： [*Building a simple Keras + deep learning REST API*](https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html) 
-
+> 使用TF2替换了原始的keras，为模型提速
 ## 使用方法
 
 > 1. 首先在服务器上部署虚拟环境 ,假设虚拟环境在/home,cd /home 进入home
