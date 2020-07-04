@@ -1,10 +1,9 @@
-# coding = utf-8
-from tensorflow.keras.applications import ResNet50, imagenet_utils
+from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.applications import imagenet_utils
 from flask import Flask, jsonify, request
 from PIL import Image
 import numpy as np
-import json
 import io
 app = Flask(__name__)
 def global_():
@@ -24,9 +23,7 @@ def processing(image):
 global_()
 @app.route("/predict", methods=['POST'])
 def model_predict():
-	data = json.loads(request.get_data().decode('utf-8'))
-	pic_path = data['image']
-	image = open(pic_path, "rb").read()
+	image = request.files['image'].read()
 	image = Image.open(io.BytesIO(image))
 	image_ = processing(image)
 	prediction = model.predict(image_)
