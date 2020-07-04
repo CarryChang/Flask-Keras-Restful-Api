@@ -39,4 +39,4 @@ def model_predict():
 	data["success"] = 1
 	return jsonify(data)
 if __name__ == "__main__":
-	app.run()
+	app.run(port=5016)
